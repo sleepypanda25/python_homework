@@ -156,6 +156,7 @@ def pig_latin(string):
         if start == "q":
             start = "q" + word[1]
             word = word[2:] + start + "ay"
+            words[i] = word
         elif start in vowels:
             words[i] = word + "ay"
         else:
