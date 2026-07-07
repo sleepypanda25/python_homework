@@ -57,7 +57,7 @@ def data_type_conversion(value, type):
         if type == "str":
             return str(value)
     except ValueError:
-        return f"You can't convert {value} into a {type}"
+        return f"You can't convert {value} into a {type}."
 
 print("\n--- Task 4 ---")
 print(data_type_conversion(5, "float"))
@@ -69,7 +69,7 @@ def grade(*args):
     try:
         return sum(args) / len(args)
     except:
-        return "Invalid data was provided"
+        return "Invalid data was provided."
 
 print("\n--- Task 5 ---")
 print(grade(90, 95, 96, 92, 99, 92, 91, 100))
@@ -142,7 +142,10 @@ def pig_latin(string):
         word = words[i]
         start = word[0]
 
-        if start in vowels:
+        if start == "q":
+            start = "q" + word[1]
+            word = word[2:] + start + ay
+        elif start in vowels:
             words[i] = word + "ay"
         else:
             j = 1
