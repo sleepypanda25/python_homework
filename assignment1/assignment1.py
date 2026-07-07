@@ -1,6 +1,5 @@
 # --- Task 1: Hello ---
 def hello():
-    print("Successful hello return")
     return "Hello!"
 
 print("--- Task 1 ---")
@@ -8,7 +7,6 @@ print(hello())
 
 # --- Task 2: Greet with a Formatted String ---
 def greet(name):
-    print("Successful hello name return")
     return f"Hello, {name}!"
 
 print("\n--- Task 2 ---")
