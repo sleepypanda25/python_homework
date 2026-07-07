@@ -67,7 +67,18 @@ print(data_type_conversion("hello", "float"))
 # --- Task 5: Grading System, Using *args ---
 def grade(*args):
     try:
-        return sum(args) / len(args)
+        average = sum(args) / len(args)
+
+        if average >= 90:
+            return "A"
+        elif average >= 80:
+            return "B"
+        elif average >= 70:
+            return "C"
+        elif average >= 60:
+            return "D"
+        else:
+            return "F"
     except:
         return "Invalid data was provided."
 
@@ -144,7 +155,7 @@ def pig_latin(string):
 
         if start == "q":
             start = "q" + word[1]
-            word = word[2:] + start + ay
+            word = word[2:] + start + "ay"
         elif start in vowels:
             words[i] = word + "ay"
         else:
