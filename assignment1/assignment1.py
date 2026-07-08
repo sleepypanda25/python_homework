@@ -151,6 +151,11 @@ def pig_latin(string):
 
     for i in range(len(words)):
         word = words[i]
+
+        if word.startswith('qu'):
+            word = word[2:] + "quay"
+            continue
+
         start = word[0]
 
         if start in vowels:
