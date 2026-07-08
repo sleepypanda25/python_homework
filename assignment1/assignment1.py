@@ -20,11 +20,11 @@ def calc(num1, num2, operation="multiply"):
         elif operation == "subtract":
             return num1 - num2
         elif operation == "divide":
-            return float(num1) / float(num2)
+            return num1 / num2
         elif operation == "modulo":
             return num1 % num2
         elif operation == "int_divide":
-            return num1 / num2
+            return num1 // num2
         elif operation == "power":
             return num1 ** num2
         else:
@@ -154,6 +154,7 @@ def pig_latin(string):
 
         if word.startswith('qu'):
             word = word[2:] + "quay"
+            words[i] = word
             continue
 
         start = word[0]
