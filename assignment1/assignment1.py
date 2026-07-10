@@ -48,11 +48,11 @@ print(calc("1", "2"))
 # --- Task 4: Data Type Conversion ---
 def data_type_conversion(value, type):
     try:
-        types = ["int", "float", "str"]
+        #types = ["int", "float", "str"]
 
-        if type not in types:
-            return "Data type not supported."
-        elif type == "int":
+        #if type not in types:
+        #    return "Data type not supported."
+        if type == "int":
             return int(value)
         elif type == "float":
             return float(value)
@@ -69,6 +69,10 @@ print(data_type_conversion("hello", "float"))
 # --- Task 5: Grading System, Using *args ---
 def grade(*args):
     try:
+        for grade in args:
+            if grade > 100 or grade < 0:
+                return "Invalid data was provided."
+
         average = sum(args) / len(args)
 
         if average >= 90:
@@ -104,13 +108,13 @@ print(repeat("hello", 5))
 
 # --- Task 7: Student Scores, Using **kwargs ---
 def student_scores(request, **kwargs):
-    if request != "best" and request != "mean":
-        return "Invalid  request."
+    #if request != "best" and request != "mean":
+    #    return "Invalid  request."
     if request == "best":
-        best = None
+        best = list(kwargs.keys())[0]
 
         for key, value in kwargs.items():
-            if best==None or value > kwargs.get(best):
+            if value > kwargs.get(best):
                 best = key
         
         return best
@@ -158,7 +162,7 @@ def pig_latin(string):
     for i in range(len(words)):
         word = words[i]
 
-        if word.startswith("qu"):
+        if word[0:2] == "qu":
             word = word[2:] + "quay"
             words[i] = word
             continue
@@ -168,20 +172,22 @@ def pig_latin(string):
         if start in vowels:
             words[i] = word + "ay"
         else:
+            print("consonants")
             j = 1
 
             while j < len(word) and word[j] not in vowels:
+                print(f"word[j]: {word[j]}")
                 start += word[j]
-                if word[j:].startswith("qu"):
+                if word[j:(j + 2)] == "qu":
                     start += "qu"
                     j += 1
                 j += 1
             
-            word = word[(j + 1):] + start + "ay"
+            word = word[j:] + start + "ay"
             words[i] = word
         
     return " ".join(words)
 
 
 print("\n--- Task 10 ---")
-print(pig_latin("my name is amanda"))
+print(pig_latin("my name is amanda quack"))
