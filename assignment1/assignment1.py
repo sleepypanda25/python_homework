@@ -33,8 +33,6 @@ def calc(num1, num2, operation="multiply"):
         return "You can't divide by 0!"
     except TypeError:
         return "You can't multiply those values!"
-    except Exception as e:
-        return e
 
 print("\n--- Task 3 ---")
 print(calc(1, 2, "add"))
@@ -50,11 +48,15 @@ print(calc("1", "2"))
 # --- Task 4: Data Type Conversion ---
 def data_type_conversion(value, type):
     try:
-        if type == "int":
+        types = ["int", "float", "str"]
+
+        if type not in types:
+            return "Data type not supported."
+        elif type == "int":
             return int(value)
-        if type == "float":
+        elif type == "float":
             return float(value)
-        if type == "str":
+        else:
             return str(value)
     except ValueError:
         return f"You can't convert {value} into a {type}."
@@ -79,7 +81,9 @@ def grade(*args):
             return "D"
         else:
             return "F"
-    except:
+    except ValueError:
+        return "Invalid data was provided."
+    except TypeError:
         return "Invalid data was provided."
 
 print("\n--- Task 5 ---")
@@ -100,6 +104,8 @@ print(repeat("hello", 5))
 
 # --- Task 7: Student Scores, Using **kwargs ---
 def student_scores(request, **kwargs):
+    if request != "best" and request != "mean":
+        return "Invalid  request."
     if request == "best":
         best = None
 
@@ -152,7 +158,7 @@ def pig_latin(string):
     for i in range(len(words)):
         word = words[i]
 
-        if word.startswith('qu'):
+        if word.startswith("qu"):
             word = word[2:] + "quay"
             words[i] = word
             continue
@@ -166,12 +172,12 @@ def pig_latin(string):
 
             while j < len(word) and word[j] not in vowels:
                 start += word[j]
-                if word[j] == "q":
-                    start += word[j + 1]
+                if word[j:].startswith("qu"):
+                    start += "qu"
                     j += 1
                 j += 1
             
-            word = word[j:] + start + "ay"
+            word = word[(j + 1):] + start + "ay"
             words[i] = word
         
     return " ".join(words)
