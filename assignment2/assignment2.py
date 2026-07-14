@@ -170,13 +170,14 @@ print(minutes_list)
 def write_sorted_list():
     minutes_list.sort(key=lambda x: x[1])
     converted_minutes_list = map(lambda x: (x[0], datetime.strftime(x[1], "%B %d, %Y")), minutes_list)
+    converted_minutes_list2 = map(lambda x: (x[0], datetime.strftime(x[1], "%B %d, %Y")), minutes_list)
 
     with open("./minutes.csv", "w") as file:
         writer = csv.writer(file)
         
         writer.writerow(minutes1["fields"])
 
-        for row in minutes_list:
+        for row in converted_minutes_list2:
             writer.writerow(row)
 
     return list(converted_minutes_list)

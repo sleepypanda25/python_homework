@@ -4,12 +4,13 @@ import traceback
 with open ('diary.txt', 'a') as file:
     try:
         command = input("What happened today?\n")
+        file.write(command + "\n")
 
         while command != "done for now":
             command = input("What else?\n")
             file.write(command + "\n")
     except Exception as e:
-        print("An exception occurred." + type(e).__name__)
+        #print("An exception occurred." + type(e).__name__)
         trace_back = traceback.extract_tb(e.__traceback__)
         stack_trace = list()
         for trace in trace_back:
