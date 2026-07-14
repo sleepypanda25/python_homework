@@ -1,0 +1,7 @@
+& c:/Users/amand/OneDrive/Documents/GitHub/python_homework/.venv/Scripts/python.exe c:/Users/amand/OneDrive/Documents/GitHub/python_homework/assignment2/diary.py
+I woke up
+Ate breakfast
+Crocheted
+Read a book
+Went grocery shopping
+done for now
