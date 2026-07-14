@@ -1,6 +1,5 @@
 # --- Task 1: Hello ---
 def hello():
-    print("Successful hello return")
     return "Hello!"
 
 print("--- Task 1 ---")
@@ -8,7 +7,6 @@ print(hello())
 
 # --- Task 2: Greet with a Formatted String ---
 def greet(name):
-    print("Successful hello name return")
     return f"Hello, {name}!"
 
 print("\n--- Task 2 ---")
@@ -22,11 +20,11 @@ def calc(num1, num2, operation="multiply"):
         elif operation == "subtract":
             return num1 - num2
         elif operation == "divide":
-            return float(num1) / float(num2)
+            return num1 / num2
         elif operation == "modulo":
             return num1 % num2
         elif operation == "int_divide":
-            return num1 / num2
+            return num1 // num2
         elif operation == "power":
             return num1 ** num2
         else:
@@ -35,8 +33,6 @@ def calc(num1, num2, operation="multiply"):
         return "You can't divide by 0!"
     except TypeError:
         return "You can't multiply those values!"
-    except Exception as e:
-        return e
 
 print("\n--- Task 3 ---")
 print(calc(1, 2, "add"))
@@ -52,14 +48,18 @@ print(calc("1", "2"))
 # --- Task 4: Data Type Conversion ---
 def data_type_conversion(value, type):
     try:
+        #types = ["int", "float", "str"]
+
+        #if type not in types:
+        #    return "Data type not supported."
         if type == "int":
             return int(value)
-        if type == "float":
+        elif type == "float":
             return float(value)
-        if type == "str":
+        else:
             return str(value)
     except ValueError:
-        return f"You can't convert {value} into a {type}"
+        return f"You can't convert {value} into a {type}."
 
 print("\n--- Task 4 ---")
 print(data_type_conversion(5, "float"))
@@ -69,9 +69,26 @@ print(data_type_conversion("hello", "float"))
 # --- Task 5: Grading System, Using *args ---
 def grade(*args):
     try:
-        return sum(args) / len(args)
-    except:
-        return "Invalid data was provided"
+        for grade in args:
+            if grade > 100 or grade < 0:
+                return "Invalid data was provided."
+
+        average = sum(args) / len(args)
+
+        if average >= 90:
+            return "A"
+        elif average >= 80:
+            return "B"
+        elif average >= 70:
+            return "C"
+        elif average >= 60:
+            return "D"
+        else:
+            return "F"
+    except ValueError:
+        return "Invalid data was provided."
+    except TypeError:
+        return "Invalid data was provided."
 
 print("\n--- Task 5 ---")
 print(grade(90, 95, 96, 92, 99, 92, 91, 100))
@@ -91,11 +108,13 @@ print(repeat("hello", 5))
 
 # --- Task 7: Student Scores, Using **kwargs ---
 def student_scores(request, **kwargs):
+    #if request != "best" and request != "mean":
+    #    return "Invalid  request."
     if request == "best":
-        best = None
+        best = list(kwargs.keys())[0]
 
         for key, value in kwargs.items():
-            if best==None or value > kwargs.get(best):
+            if value > kwargs.get(best):
                 best = key
         
         return best
@@ -142,15 +161,26 @@ def pig_latin(string):
 
     for i in range(len(words)):
         word = words[i]
+
+        if word[0:2] == "qu":
+            word = word[2:] + "quay"
+            words[i] = word
+            continue
+
         start = word[0]
 
         if start in vowels:
             words[i] = word + "ay"
         else:
+            print("consonants")
             j = 1
 
             while j < len(word) and word[j] not in vowels:
+                print(f"word[j]: {word[j]}")
                 start += word[j]
+                if word[j:(j + 2)] == "qu":
+                    start += "qu"
+                    j += 1
                 j += 1
             
             word = word[j:] + start + "ay"
@@ -160,4 +190,4 @@ def pig_latin(string):
 
 
 print("\n--- Task 10 ---")
-print(pig_latin("my name is amanda"))
+print(pig_latin("my name is amanda quack"))
