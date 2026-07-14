@@ -10,7 +10,6 @@ with open ('diary.txt', 'a') as file:
             command = input("What else?\n")
             file.write(command + "\n")
     except Exception as e:
-        #print("An exception occurred." + type(e).__name__)
         trace_back = traceback.extract_tb(e.__traceback__)
         stack_trace = list()
         for trace in trace_back:
