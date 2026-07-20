@@ -9,8 +9,8 @@ def logger_decorator(func):
         result = func(*args, **kwargs)
 
         logger.log(logging.INFO, "function: " + func.__name__)
-        logger.log(logging.INFO, "positional parameters: " + args)
-        logger.log(logging.INFO, "keyword parameters:" + kwargs)
+        logger.log(logging.INFO, "positional parameters: " + list(args))
+        logger.log(logging.INFO, "keyword parameters:" + dict(kwargs))
         logger.log(logging.INFO, "return: " + result)
 
         return result
