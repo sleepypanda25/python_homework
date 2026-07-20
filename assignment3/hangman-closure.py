@@ -2,7 +2,8 @@ def make_hangman(secret_word):
     guesses = []
 
     def hangman_closure(guess):
-        guesses.append(guess)
+        if guess not in guesses:
+            guesses.append(guess)
 
         so_far = ""
 
@@ -14,9 +15,11 @@ def make_hangman(secret_word):
         
         print(so_far)
 
-        if so_far == secret_word:
-            return True
-        return False
+        for letter in so_far:
+            if letter not in secret_word:
+                return False
+
+        return True
     
     return hangman_closure
 
