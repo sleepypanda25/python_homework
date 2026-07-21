@@ -8,16 +8,16 @@ def logger_decorator(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
 
-        logger.log(logging.INFO, "function: " + func.__name__)
-        if len(args) == 0:
-            logger.log(logging.INFO, "positional parameters: " + list(args))
+        logger.log(logging.INFO, f"function: {func.__name__}")
+        if len(args) != 0:
+            logger.log(logging.INFO, f"positional parameters: {list(args)}")
         else:
             logger.log(logging.INFO, "positional parameters: none")
-        if len(kwargs) == 0:
-            logger.log(logging.INFO, "keyword parameters: " + dict(kwargs))
+        if len(kwargs) != 0:
+            logger.log(logging.INFO, f"keyword parameters: {dict(kwargs)}")
         else:
             logger.log(logging.INFO, "keyword parameters: none")
-        logger.log(logging.INFO, "return: " + result)
+        logger.log(logging.INFO, f"return: {result}")
 
         return result
     return wrapper
@@ -31,6 +31,7 @@ def true_func(*args):
     print("True dat")
     return True
 
+@logger_decorator
 def logger_return(**kwargs):
     print("Roger that")
     return logger_decorator
