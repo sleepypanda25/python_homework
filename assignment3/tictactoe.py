@@ -1,7 +1,7 @@
 class TictactoeException(Exception):
     def __init__(self, message):
         self.message = message
-        super.__init__()
+        super().__init__()
 
 class Board:
     valid_moves = ["upper left", "upper center", "upper right", "middle left", "center", "middle right", "lower left", "lower center", "lower right"]
