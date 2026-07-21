@@ -16,7 +16,7 @@ def make_hangman(secret_word):
         print(so_far)
 
         for letter in secret_word:
-            if letter not in so_far:
+            if letter not in guesses:
                 return False
 
         return True

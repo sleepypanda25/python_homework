@@ -38,5 +38,5 @@ def logger_return(**kwargs):
 
 print("--- Task 1 ---")
 hello_world()
-true_func(a, b)
+true_func("a", "b")
 logger_return(name="Amanda")
