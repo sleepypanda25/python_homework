@@ -103,22 +103,21 @@ clean_data["Salary"] = pd.to_numeric(clean_data["Salary"], errors="coerce")
 print(clean_data)
 
 # --- Task 4: Part 5 ---
-age_mean = clean_data["Age"].mean()
+age_mean = clean_data["Age"].mean(numeric_only=True)
 clean_data["Age"] = clean_data["Age"].fillna(age_mean)
 
-salary_median = clean_data["Salary"].median()
+salary_median = clean_data["Salary"].median(numeric_only=True)
 clean_data["Salary"] = clean_data["Salary"].fillna(salary_median)
 
 # --- Task 4: Part 6 ---
 clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
-num_invalid_dates = clean_data["Hire Date"].isna().sum()
+clean_data["Hire Date"] = clean_data["Hire Date"].replace(pd.NaT, "unknown")
 
 print(clean_data)
-print("num invalid: ", num_invalid_dates)
 
 # --- Task 4: Part 7 ---
 clean_data["Name"] = clean_data["Name"].str.strip()
-#clean_data["Name"] = clean_data["Name"].str.upper()
+clean_data["Name"] = clean_data["Name"].str.upper()
 
 clean_data["Department"] = clean_data["Department"].str.strip()
 clean_data["Department"] = clean_data["Department"].str.upper()
