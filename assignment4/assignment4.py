@@ -112,7 +112,7 @@ clean_data["Salary"] = clean_data["Salary"].fillna(salary_median)
 
 # --- Task 4: Part 6 ---
 clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
-clean_data["Hire Date"] = clean_data["Hire Date"].fillna(pd.Timestamp.now().normalize())
+clean_data = clean_data.dropna(subset=["Hire Date"])
 
 print(clean_data)
 
