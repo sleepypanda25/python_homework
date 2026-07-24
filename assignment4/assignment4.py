@@ -50,7 +50,7 @@ print(json_employees)
 # --- Task 2: Part 3 ---
 more_employees = pd.concat([task2_employees, json_employees], ignore_index=True)
 
-print(task2_employees)
+print(more_employees)
 
 
 # --- Task 3: Data Inspection - Using Head, Tail, and Info Methods ---
@@ -97,6 +97,8 @@ print(clean_data)
 
 # --- Task 4: Part 4 ---
 clean_data["Salary"] = pd.to_numeric(clean_data["Salary"], errors="coerce")
+clean_data["Salary"] = clean_data["Salary"].replace("unknown", pd.NA)
+clean_data["Salary"] = clean_data["Salary"].replace("n/a", pd.NA)
 
 print(clean_data)
 
