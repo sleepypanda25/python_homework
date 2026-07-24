@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # --- Task 1: Introduction to Pandas - Creating and Manipulating DataFrames ---
 people = {
@@ -96,8 +97,8 @@ clean_data["Age"] = pd.to_numeric(clean_data["Age"], errors="coerce")
 print(clean_data)
 
 # --- Task 4: Part 4 ---
-clean_data["Salary"] = clean_data["Salary"].replace("unknown", pd.NA)
-clean_data["Salary"] = clean_data["Salary"].replace("n/a", pd.NA)
+clean_data["Salary"] = clean_data["Salary"].replace("unknown", np.nan)
+clean_data["Salary"] = clean_data["Salary"].replace("n/a", np.nan)
 clean_data["Salary"] = pd.to_numeric(clean_data["Salary"], errors="coerce")
 
 print(clean_data)
@@ -111,6 +112,7 @@ clean_data["Salary"] = clean_data["Salary"].fillna(salary_median)
 
 # --- Task 4: Part 6 ---
 clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
+clean_data["Hire Date"].fillna(clean_data["Hire Date"].mode()[0])
 
 print(clean_data)
 
