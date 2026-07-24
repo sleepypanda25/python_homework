@@ -104,14 +104,14 @@ clean_data["Salary"] = pd.to_numeric(clean_data["Salary"], errors="coerce")
 print(clean_data)
 
 # --- Task 4: Part 5 ---
-age_mean = clean_data["Age"].mean(numeric_only=True)
+age_mean = clean_data["Age"].mean()
 clean_data["Age"] = clean_data["Age"].fillna(age_mean)
 
-salary_median = clean_data["Salary"].median(numeric_only=True)
+salary_median = clean_data["Salary"].median()
 clean_data["Salary"] = clean_data["Salary"].fillna(salary_median)
 
 # --- Task 4: Part 6 ---
-clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
+clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="raise")
 clean_data["Hire Date"].fillna(clean_data["Hire Date"].mode()[0])
 
 print(clean_data)
