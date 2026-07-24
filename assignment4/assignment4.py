@@ -111,7 +111,7 @@ salary_median = clean_data["Salary"].median()
 clean_data["Salary"] = clean_data["Salary"].fillna(salary_median)
 
 # --- Task 4: Part 6 ---
-clean_data["Hire Date More"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
+clean_data["Hire Date"] = pd.to_datetime(clean_data["Hire Date"], format="mixed", errors="coerce")
 
 print(clean_data)
 
