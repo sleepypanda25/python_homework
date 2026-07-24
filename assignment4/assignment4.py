@@ -82,9 +82,9 @@ print("\n--- Task 4 ---")
 # --- Task 4: Part 1 ---
 dirty_data = pd.read_csv("dirty_data.csv")
 
-print(dirty_data)
-
 clean_data = dirty_data.copy()
+
+print(dirty_data)
 
 # --- Task 4: Part 2 ---
 clean_data = clean_data.drop_duplicates()
