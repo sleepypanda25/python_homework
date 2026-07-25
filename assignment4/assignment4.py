@@ -119,10 +119,8 @@ print("Number of Invalid Dates: ", num_invalid_dates)
 
 
 # --- Task 4: Part 7 ---
-clean_data["Name"] = clean_data["Name"].str.strip()
-clean_data["Name"] = clean_data["Name"].str.upper()
+clean_data['Name'] = clean_data['Name'].str.strip().str.upper()
 
-clean_data["Department"] = clean_data["Department"].str.strip()
-clean_data["Department"] = clean_data["Department"].str.upper()
+clean_data["Department"] = clean_data["Department"].str.strip().str.upper()
 
 print(clean_data)
