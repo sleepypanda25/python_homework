@@ -86,10 +86,10 @@ clean_data = dirty_data.copy()
 
 print(dirty_data)
 
+print("Type Age: ", type(clean_data["Age"][1]))
+
 # --- Task 4: Part 2 ---
 clean_data = clean_data.drop_duplicates()
-
-print(clean_data)
 
 # --- Task 4: Part 3 ---
 clean_data["Age"] = pd.to_numeric(clean_data["Age"], errors="coerce")
@@ -116,6 +116,7 @@ num_invalid_dates = clean_data["Hire Date"].isna().sum()
 
 print(clean_data)
 print("Number of Invalid Dates: ", num_invalid_dates)
+
 
 # --- Task 4: Part 7 ---
 clean_data["Name"] = clean_data["Name"].str.strip()
