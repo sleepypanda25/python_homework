@@ -10,14 +10,32 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 
 try:
     driver.get("https://durhamcounty.bibliocommons.com/v2/search?query=learning%20spanish&searchType=smart")
-    #time.sleep(3)
+
+    # All search results
+    # Tag: li
+    # Class: cp-search-result-item
     search_results = driver.find_elements(By.CSS_SELECTOR, "li.cp-search-result-item")
     results = []
 
     for entry in search_results:
+        # Title
+        # Tag: span
+        # Class: title-content
         title = entry.find_element(By.CSS_SELECTOR, "span.title-content")
+
+        # Authors
+        # Tag: a
+        # Class: author-link
         authors = entry.find_elements(By.CSS_SELECTOR, "a.author-link")
+
+        # Format Year Parent Div
+        # Tag: div
+        # Class: cp-format-info
         format_year_parent = entry.find_element(By.CSS_SELECTOR, "div.cp-format-info")
+
+        # Format Year
+        # Tag: span
+        # Class: display-info-primary
         format_year = format_year_parent.find_element(By.CSS_SELECTOR, "span.display-info-primary")
 
         authors_str = ';'.join(author.text for author in authors)
@@ -30,9 +48,8 @@ try:
 
     df.to_csv('get_books.csv', index=False)
 
-    data = {"results": results}
     with open('get_books.json', 'w') as json_file:
-        json.dump(data, json_file, indent=4)
+        json.dump(results, json_file, indent=4)
 except Exception as e:
     print("Couldn't get the web page")
     print(f"Exception: {type(e).__name__} {e}")

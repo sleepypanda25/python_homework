@@ -17,7 +17,7 @@ for Question #1 above). Anything other than "*" means it applies
 to only some user agents. For example, "User-agent: Orthogaffe"
 only applies to Orthogaffe.
 
-3. Purpose of robots.txt files:
+3. Purpose of robots.txt files (Reflection):
 These files outline how the website owner wants the website to
 be used in web scraping and what they've given or refused
 permission for some or all crawlers to access. Respecting these

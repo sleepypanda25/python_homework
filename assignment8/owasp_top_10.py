@@ -15,11 +15,11 @@ try:
 
     top_10_link.click()
 
-    list = driver.find_elements(By.XPATH, '//ol/li/a')
+    list_all = driver.find_elements(By.XPATH, '//ol/li/a')
     
     top_10 = []
 
-    for item in list:
+    for item in list_all:
         title = item.text
         url = item.get_attribute("href")
 
