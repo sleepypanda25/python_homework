@@ -16,23 +16,19 @@ try:
 
     for entry in search_results:
         title = entry.find_element(By.CSS_SELECTOR, "span.title-content")
-        author = entry.find_element(By.CSS_SELECTOR, "a.author-link")
+        authors = entry.find_elements(By.CSS_SELECTOR, "a.author-link")
         format_year_parent = entry.find_element(By.CSS_SELECTOR, "div.cp-format-info")
         format_year = format_year_parent.find_element(By.CSS_SELECTOR, "span.display-info-primary")
 
-        book = {"Title": title.text, "Author": author.text, "Format-Year": format_year.text}
+        authors_str = ';'.join(author.text for author in authors)
+
+        book = {"Title": title.text, "Author": authors_str, "Format-Year": format_year.text}
         results.append(book)
 
     df = pd.DataFrame(results)
     print(df)
 
     df.to_csv('get_books.csv', index=False)
-
-    #with open('get_books.csv', 'w') as file:
-    #    writer = csv.writer(file)
-
-    #    for book in results:
-    #        writer.writerow([book['Title'], book['Author'], book['Format-Year']])
 
     data = {"results": results}
     with open('get_books.json', 'w') as json_file:

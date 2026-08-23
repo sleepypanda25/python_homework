@@ -15,7 +15,7 @@ try:
 
     top_10_link.click()
 
-    list = driver.find_elements(By.XPATH, '//ol/li')
+    list = driver.find_elements(By.XPATH, '//ol/li/a')
     
     top_10 = []
 
@@ -27,14 +27,9 @@ try:
         top_10.append(element)
 
     print(top_10)
+    df = pd.DataFrame(top_10)
 
-    with open('owasp_top_10.csv', 'w') as file:
-        writer = csv.writer(file)
-
-        for element in top_10:
-            writer.writerow([element['Title'], element['Link']])
-
-    driver.back()
+    df.to_csv('owasp_top_10.csv', index=False)
 except Exception as e:
     print(e)
 finally:
