@@ -41,7 +41,6 @@ try:
 
     driver.back()
 except Exception as e:
-    print("Trouble opoening web page")
     print(e)
 finally:
     driver.quit()
