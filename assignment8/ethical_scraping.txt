@@ -1,0 +1,26 @@
+1. Which sections of the website are restricted for crawling?
+Disallow: /w/
+Disallow: /api/
+Disallow: /trap/
+Disallow: /wiki/Special:
+Disallow: /wiki/Spezial:
+Disallow: /wiki/Spesial:
+Disallow: /wiki/Special%3A
+Disallow: /wiki/Spezial%3A
+Disallow: /wiki/Spesial%3A
+
+2. Are there specific rules for certain user agents?
+Yes. Each block that starts with "User-agent:" specifies what
+the following restrictions apply to. "User-agent: *" means the
+restrictions apply to all crawlers (which is how I got my answer
+for Question #1 above). Anything other than "*" means it applies
+to only some user agents. For example, "User-agent: Orthogaffe"
+only applies to Orthogaffe.
+
+3. Purpose of robots.txt files (Reflection):
+These files outline how the website owner wants the website to
+be used in web scraping and what they've given or refused
+permission for some or all crawlers to access. Respecting these
+is crucial in ensuring we're not violating the website owner's
+wishes and privacy. Ethical webscraping means only accessing what
+we have permission to access.
