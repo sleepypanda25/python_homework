@@ -3,4 +3,7 @@ Something I did have to look into was how to
 access or click into a link I found on the
 original page, but it wasn't something difficult
 to figure out or work around. I simply searched
-it up.
+it up. Specifically, I had to figure out how to
+click into the link to the web page that actually
+contains the 10 vulnerabilities. Other than that,
+I didn't have any challenges.

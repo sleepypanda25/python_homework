@@ -10,18 +10,13 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 try:
     driver.get("https://owasp.org/www-project-top-ten/")
 
-    sidelist_div = driver.find_element(By.CSS_SELECTOR, 'div.sidebar')
-    sidelist = sidelist_div.find_elements(By.CSS_SELECTOR, 'a')
-
     top_10_link = driver.find_element(By.XPATH, '//a[text()="OWASP Top 10:2025"]')
     url = top_10_link.get_attribute("href")
 
     top_10_link.click()
 
-    list_header = driver.find_element(By.XPATH, '//h3[text()="Top 10:2025 List"]')
-    ordered_list = list_header.find_element(By.XPATH, 'following-sibling::ol')
-    list = ordered_list.find_elements(By.CSS_SELECTOR, 'a')
-
+    list = driver.find_elements(By.XPATH, '//ol/li')
+    
     top_10 = []
 
     for item in list:

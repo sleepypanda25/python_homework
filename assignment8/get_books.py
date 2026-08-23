@@ -26,11 +26,13 @@ try:
     df = pd.DataFrame(results)
     print(df)
 
-    with open('get_books.csv', 'w') as file:
-        writer = csv.writer(file)
+    df.to_csv('get_books.csv', index=False)
 
-        for book in results:
-            writer.writerow([book['Title'], book['Author'], book['Format-Year']])
+    #with open('get_books.csv', 'w') as file:
+    #    writer = csv.writer(file)
+
+    #    for book in results:
+    #        writer.writerow([book['Title'], book['Author'], book['Format-Year']])
 
     data = {"results": results}
     with open('get_books.json', 'w') as json_file:
