@@ -15,7 +15,7 @@ try:
     results = []
 
     for entry in search_results:
-        title = entry.find_element(By.CSS_SELECTOR, "h3.cp-title")
+        title = entry.find_element(By.CSS_SELECTOR, "span.title-content")
         author = entry.find_element(By.CSS_SELECTOR, "a.author-link")
         format_year_parent = entry.find_element(By.CSS_SELECTOR, "div.cp-format-info")
         format_year = format_year_parent.find_element(By.CSS_SELECTOR, "span.display-info-primary")
@@ -35,10 +35,6 @@ try:
     data = {"results": results}
     with open('get_books.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
-
-    robots_url = "https://en.wikipedia.org/robots.txt"
-    driver.get(robots_url)
-    print(driver.page_source)
 except Exception as e:
     print("Couldn't get the web page")
     print(f"Exception: {type(e).__name__} {e}")
