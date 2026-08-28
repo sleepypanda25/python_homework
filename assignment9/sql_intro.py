@@ -73,6 +73,7 @@ try:
         subscription_id INTEGER PRIMARY KEY,
         subscriber_id INTEGER NOT NULL,
         magazine_id INTEGER NOT NULL,
+        UNIQUE (subscriber_id, magazine_id),
         FOREIGN KEY(subscriber_id) REFERENCES subscribers(subscriber_id),
         FOREIGN KEY(magazine_id) REFERENCES magazines(magazine_id)
     )"""
@@ -116,7 +117,7 @@ try:
     query = """
     SELECT m.magazine_name, p.publisher_name
     FROM publishers p JOIN magazines m ON p.publisher_id = m.publisher_id
-    WHERE m.publisher_id = 1;
+    WHERE m.publisher_name='Publisher A';
     """
     cursor.execute(query)
     print(cursor.fetchall())

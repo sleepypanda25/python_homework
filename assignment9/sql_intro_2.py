@@ -1,5 +1,4 @@
 # --- Task 5 ---
-# (incomplete)
 import pandas as pd
 import sqlite3
 
@@ -21,4 +20,4 @@ with sqlite3.connect("../db/lesson.db") as conn:
     print(aggregated_df.head())
 
     df.sort_values(by='product_name', inplace=True)
-    df.to_csv('../csv/order_summary.csv', index=False)
+    df.to_csv('order_summary.csv', index=False)
