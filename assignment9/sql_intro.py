@@ -29,6 +29,18 @@ def fill_subscribers(cursor, subscriber_id, name, address):
 
 def fill_subscriptions(cursor, subscription_id, subscriber_id, magazine_id):
     try:
+        cursor.execute(
+            """SELECT subscriber_id, magazine_id"
+            FROM subscriptions
+            WHERE subscriber_id=? AND magazine_id=?
+            """,
+            (subscriber_id, magazine_id)
+        )
+        exists = cursor.fetchone()
+
+        if exists:
+            print(f"Subscriber {subscriber_id} has already subscribed to Magazine {magazine_id}")
+
         cursor.execute("INSERT INTO subscriptions (subscription_id, subscriber_id, magazine_id) VALUES(?, ?, ?)", (subscription_id, subscriber_id, magazine_id))
     except Exception as e:
         print(f"Error filling subscriptions: {e}")

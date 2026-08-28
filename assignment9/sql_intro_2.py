@@ -19,5 +19,5 @@ with sqlite3.connect("../db/lesson.db") as conn:
     aggregated_df = df.groupby('product_id').agg({'line_item_id': 'count', 'total': 'sum', 'product_name': 'first'})
     print(aggregated_df.head())
 
-    df.sort_values(by='product_name', inplace=True)
-    df.to_csv('order_summary.csv', index=False)
+    aggregated_df.sort_values(by='product_name', inplace=True)
+    aggregated_df.to_csv('order_summary.csv', index=False)
