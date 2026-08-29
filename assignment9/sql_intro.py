@@ -8,14 +8,32 @@ if os.path.exists(DB_PATH):
 
 def fill_publishers(cursor, publisher_id, publisher_name):
     try:
-        cursor.execute("INSERT INTO publishers (publisher_id, publisher_name) VALUES(?, ?)", (publisher_id, publisher_name))
+        cursor.execute(
+            "SELECT publisher_id FROM publishers WHERE publisher_name=?",
+            (publisher_name,)
+        )
+        exists = cursor.fetchone()
+        
+        if exists:
+            print(f"Publisher {publisher_name} with the id {publisher_id} already exists.")
+        else:
+            cursor.execute("INSERT INTO publishers (publisher_id, publisher_name) VALUES(?, ?)", (publisher_id, publisher_name))
     except Exception as e:
         print(f"Error filling publishers: {e}")
         conn.rollback()
 
 def fill_magazines(cursor, magazine_id, magazine_name, publisher_id):
     try:
-        cursor.execute("INSERT INTO magazines (magazine_id, publisher_id, magazine_name) VALUES(?, ?, ?)", (magazine_id, publisher_id, magazine_name))
+        cursor.execute(
+            "SELECT magazine_id FROM magazines WHERE magazine_name=? AND publisher_id=?",
+            (magazine_name, publisher_id)
+        )
+        exists = cursor.fetchone()
+        
+        if exists:
+            print(f"Magazine {magazine_name} with the id {magazine_id} and publisher {publisher_id} already exists.")
+        else:
+            cursor.execute("INSERT INTO magazines (magazine_id, publisher_id, magazine_name) VALUES(?, ?, ?)", (magazine_id, publisher_id, magazine_name))
     except Exception as e:
         print(f"Error filling magazines: {e}")
         conn.rollback()
@@ -29,7 +47,7 @@ def fill_subscribers(cursor, subscriber_id, name, address):
         exists = cursor.fetchone()
         
         if exists:
-            print(f"Subscriber {subscriber_id} with the name {name} and address {address} already exists.")
+            print(f"Subscriber {name} with the id {subscriber_id} and address {address} already exists.")
         else:
             cursor.execute("INSERT INTO subscribers (subscriber_id, name, address) VALUES(?, ?, ?)", (subscriber_id, name, address))
     except Exception as e:
