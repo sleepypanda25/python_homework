@@ -153,7 +153,7 @@ try:
     print(cursor.fetchall())
 
     query = """
-    SELECT m.magazine_name, p.publisher_name
+    SELECT m.*, p.publisher_name
     FROM publishers p JOIN magazines m ON p.publisher_id = m.publisher_id
     WHERE p.publisher_name='Publisher A';
     """
