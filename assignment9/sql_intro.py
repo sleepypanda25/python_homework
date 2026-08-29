@@ -101,6 +101,8 @@ try:
     # --- Task 3 ---
     fill_publishers(cursor, 1, "Publisher A")
     fill_publishers(cursor, 2, "Publisher B")
+    fill_publishers(cursor, 1, "Publisher A")
+    fill_publishers(cursor, 3, "Publisher C")
 
     fill_magazines(cursor, 1, "Magazine X", 1)
     fill_magazines(cursor, 2, "Magazine Y", 1)
