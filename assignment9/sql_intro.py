@@ -22,7 +22,16 @@ def fill_magazines(cursor, magazine_id, magazine_name, publisher_id):
 
 def fill_subscribers(cursor, subscriber_id, name, address):
     try:
-        cursor.execute("INSERT INTO subscribers (subscriber_id, name, address) VALUES(?, ?, ?)", (subscriber_id, name, address))
+        cursor.execute(
+            "SELECT subscriber_id FROM subscribers WHERE name = ? AND address = ?",
+            (name, address)
+        )
+        exists = cursor.fetchone()
+        
+        if exists:
+            print(f"Subscriber {subscriber_id} with the name {name} and address {address} already exists.")
+        else:
+            cursor.execute("INSERT INTO subscribers (subscriber_id, name, address) VALUES(?, ?, ?)", (subscriber_id, name, address))
     except Exception as e:
         print(f"Error filling subscribers: {e}")
         conn.rollback()
@@ -30,18 +39,15 @@ def fill_subscribers(cursor, subscriber_id, name, address):
 def fill_subscriptions(cursor, subscription_id, subscriber_id, magazine_id):
     try:
         cursor.execute(
-            """SELECT subscriber_id, magazine_id"
-            FROM subscriptions
-            WHERE subscriber_id=? AND magazine_id=?
-            """,
+            "SELECT subscriber_id, magazine_id FROM subscriptions WHERE subscriber_id=? AND magazine_id=?",
             (subscriber_id, magazine_id)
         )
         exists = cursor.fetchone()
 
         if exists:
             print(f"Subscriber {subscriber_id} has already subscribed to Magazine {magazine_id}")
-
-        cursor.execute("INSERT INTO subscriptions (subscription_id, subscriber_id, magazine_id) VALUES(?, ?, ?)", (subscription_id, subscriber_id, magazine_id))
+        else:
+            cursor.execute("INSERT INTO subscriptions (subscription_id, subscriber_id, magazine_id) VALUES(?, ?, ?)", (subscription_id, subscriber_id, magazine_id))
     except Exception as e:
         print(f"Error filling subscriptions: {e}")
         conn.rollback()
@@ -55,7 +61,7 @@ try:
     publishers = """
     CREATE TABLE IF NOT EXISTS publishers(
         publisher_id INTEGER PRIMARY KEY,
-        publisher_name TEXT NOT NULL
+        publisher_name TEXT NOT NULL UNIQUE
     )"""
     
     cursor.execute(publishers)
@@ -63,7 +69,7 @@ try:
     magazines = """
     CREATE TABLE IF NOT EXISTS magazines(
         magazine_id INTEGER PRIMARY KEY,
-        magazine_name TEXT NOT NULL,
+        magazine_name TEXT NOT NULL UNIQUE,
         publisher_id INTEGER NOT NULL,
         FOREIGN KEY(publisher_id) REFERENCES publishers(publisher_id)
     )"""
@@ -121,7 +127,7 @@ try:
     print(cursor.fetchall())
 
     query = """
-    SELECT magazine_name FROM magazines ORDER BY magazine_name ASC;
+    SELECT * FROM magazines ORDER BY magazine_name ASC;
     """
     cursor.execute(query)
     print(cursor.fetchall())
